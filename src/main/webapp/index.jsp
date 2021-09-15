@@ -1,15 +1,14 @@
 <%--index.jsp--%>
-<%--HTML в виде таблицы со скриплетом--%>
+<%--Страница содержит ссылки для переходов на страницы кандидатов и выкансий--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.1 15.09.2021--%>
-
+<%--@version 2.0 15.09.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 
-<%--Страница с таблицей--%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,21 +34,16 @@
 <body>
 <div class="container">
     <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Объявления</th>
-            </tr>
-            </thead>
-            <tbody>
-<%--            Выводим названия вакансий из класса Store--%>
-            <% for (Post post : Store.instOf().findAllPosts()) { %>
-            <tr>
-                <td><%= post.getName() %></td>
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
+        <ul class="nav">
+            <li class="nav-item">
+                <%--Загрузка ссылки на страницу вакансий--%>
+                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <%--Загрузка ссылки на страницу кандидатов--%>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
