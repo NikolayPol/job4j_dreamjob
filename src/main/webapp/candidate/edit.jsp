@@ -1,7 +1,7 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для нового кандидата--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.0 15.09.2021--%>
+<%--@version 2.0 16.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
@@ -36,12 +36,12 @@
                 Новый кандидат.
             </div>
             <div class="card-body">
-                <form>
+                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
                     <div class="form-group">
-                        <label>Имя</label>
-                        <label>
-                            <input type="text" class="form-control">
-                        </label>
+                            <label>Имя</label>
+                            <label>
+                                <input type="text" class="form-control" name="name">
+                            </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
