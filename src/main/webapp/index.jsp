@@ -1,7 +1,7 @@
 <%--index.jsp--%>
 <%--Страница содержит ссылки для переходов на страницы кандидатов и выкансий--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.0 15.09.2021--%>
+<%--@version 3.1 15.09.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -30,11 +30,17 @@
 <div class="container">
     <div class="row">
         <ul class="nav">
+            <%--Ссылка на страницу с вакансиями--%>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/posts.jsp">Вакансии</a>
             </li>
+            <%--Ссылка на страницу с кандидатами--%>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/candidates.jsp">Кандидаты</a>
+            </li>
+            <%--Ссылка на страницу с формой ввода для новой вакансии--%>
+            <li>
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
             </li>
         </ul>
     </div>
