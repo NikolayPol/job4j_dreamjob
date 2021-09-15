@@ -42,6 +42,10 @@
             <li>
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
             </li>
+            <%--Ссылка на страницу с формой ввода для нового кандидата--%>
+            <li>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
         </ul>
     </div>
     <div class="row">
