@@ -1,6 +1,7 @@
-<%--HTML со скриплетом--%>
+<%--index.jsp--%>
+<%--HTML в виде таблицы со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.0 15.09.2021--%>
+<%--@version 1.1 15.09.2021--%>
 
 
 <%--Импоритруем java классы--%>
@@ -42,7 +43,7 @@
             </thead>
             <tbody>
 <%--            Выводим названия вакансий из класса Store--%>
-            <% for (Post post : Store.instOf().findAll()) { %>
+            <% for (Post post : Store.instOf().findAllPosts()) { %>
             <tr>
                 <td><%= post.getName() %></td>
             </tr>

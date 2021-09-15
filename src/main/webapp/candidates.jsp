@@ -1,15 +1,12 @@
-<%--posts.jsp--%>
-<%--HTML в виде карточек со скриплетом--%>
-<%--@author Nikolay Polegaev--%>
-<%--@version 1.1 15.09.2021--%>
-
+<%--candidates.jsp--%>
+<%--HTML в выводом Кандидатов в виде карточек со скриплетом--%>
+<%--  @author Nikolay Polegaev.--%>
+<%--  @version 1.0 15.09.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
-
-<%--Страница с таблицей--%>
+<%@ page import="ru.job4j.dream.model.Candidate" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,11 +28,12 @@
 </head>
 <body>
 <div class="container pt-3">
-    <%--Сделаем таблицу в виде карточек card-body--%>
+
     <div class="row">
+<%--Сделаем таблицу в виде карточек card-body--%>
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Вакансии
+                Кандидаты
             </div>
             <div class="card-body">
                 <table class="table">
@@ -45,10 +43,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%--Выводим названия вакансий из класса Store--%>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <%--Выводим кандидатов из класса Store--%>
+                    <% for (Candidate can : Store.instOf().findAllCandidates()) { %>
                     <tr>
-                        <td><%= post.getName() %></td>
+                        <td><%= can.getName() %></td>
                     </tr>
                     <% } %>
                     </tbody>
