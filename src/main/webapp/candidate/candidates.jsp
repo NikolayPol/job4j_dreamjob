@@ -7,6 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
+<%@ page import="java.util.Collection" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,7 +45,7 @@
                     </thead>
                     <tbody>
                     <%--Выводим кандидатов из класса Store--%>
-                    <% for (Candidate can : Store.instOf().findAllCandidates()) { %>
+                    <% for (Candidate can : (Collection<Candidate>) request.getAttribute("cands")) { %>
                     <tr>
                         <td>
                             <%--Добавили иконку в таблицу и ссылку на страницу edit--%>

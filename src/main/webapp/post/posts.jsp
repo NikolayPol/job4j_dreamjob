@@ -1,13 +1,14 @@
 <%--posts.jsp--%>
 <%--HTML в виде карточек со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 2.0 16.09.2021--%>
+<%--@version 3.0 16.09.2021--%>
 
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
+<%@ page import="java.util.Collection" %>
 
 <%--Страница с таблицей--%>
 <!doctype html>
@@ -49,7 +50,7 @@
                     </thead>
                     <tbody>
                     <%--Выводим названия вакансий из класса Store--%>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <% for (Post post : (Collection<Post>) request.getAttribute("posts")) { %>
                     <tr>
                         <td>
                             <%--Добавили иконку в таблицу и ссылку на страницу edit--%>

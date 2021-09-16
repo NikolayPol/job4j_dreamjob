@@ -51,7 +51,7 @@
             <div class="card-body">
                 <%--Чтобы JSP отправляла данные на сервер нужно в теге form указать адрес сервлета.--%>
                 <%--в реквесте передаем параметр id вакансии--%>
-                <form action="<%=request.getContextPath()%>/post/save?id=<%=post.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
                             <%--в запросе на сервер нужно отправить содержимое этого поля с ключом name.--%>

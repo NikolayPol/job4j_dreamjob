@@ -1,7 +1,7 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для нового кандидата--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 2.1 16.09.2021--%>
+<%--@version 3.0 16.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
@@ -49,7 +49,7 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save?id=<%=can.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
                     <div class="form-group">
                             <label>Имя</label>
                             <label>
