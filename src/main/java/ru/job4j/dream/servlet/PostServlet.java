@@ -10,17 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Класс PostServlet
+ * Класс PostServlet сохраняет новую вакансию и возвращает ответ.
  *
  * @author Nikolay Polegaev
- * @version 1.0 15.09.2021
+ * @version 2.0 16.09.2021
  */
 public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Store.instOf().save(new Post(0, req.getParameter("name")));
+        Store.instOf().save(new Post(Integer.parseInt(req.getParameter("id")),
+                req.getParameter("name")));
         resp.sendRedirect(req.getContextPath() + "/post/posts.jsp");
     }
 }

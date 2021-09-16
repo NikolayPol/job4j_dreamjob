@@ -1,11 +1,12 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для нового кандидата--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 2.0 16.09.2021--%>
+<%--@version 2.1 16.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
+<%@ page import="ru.job4j.dream.model.Candidate" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,18 +30,30 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<%--Ищем по id кандидата в базе--%>
+<%
+    String id = request.getParameter("id");
+    Candidate can = new Candidate(0, "");
+    if (id != null) {
+        can =Store.instOf().findByIdCand(Integer.parseInt(id));
+    }
+%>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Новый кандидат.
+                <% if (id == null) { %>
+                  Новый кандидат.
+                <% } else { %>
+                Редактирование кандидата.
+                <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
+                <form action="<%=request.getContextPath()%>/candidate/save?id=<%=can.getId()%>" method="post">
                     <div class="form-group">
                             <label>Имя</label>
                             <label>
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
                             </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
