@@ -1,7 +1,7 @@
 <%--posts.jsp--%>
 <%--HTML в виде карточек со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.0 16.09.2021--%>
+<%--@version 3.2 16.09.2021--%>
 
 
 <%--Импоритруем java классы--%>
@@ -9,6 +9,7 @@
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.util.Collection" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--Страница с таблицей--%>
 <!doctype html>
@@ -50,18 +51,17 @@
                     </thead>
                     <tbody>
                     <%--Выводим названия вакансий из класса Store--%>
-                    <% for (Post post : (Collection<Post>) request.getAttribute("posts")) { %>
+                    <c:forEach var="post" items="${posts}">
                     <tr>
                         <td>
                             <%--Добавили иконку в таблицу и ссылку на страницу edit--%>
-                            <a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
-                                <i class="fa fa-edit mr-3">
-                                </i>
+                            <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                                <i class="fa fa-edit mr-3"></i>
                             </a>
-                            <%= post.getName()%>
+                            <c:out value="${post.name}"/>
                         </td>
                     </tr>
-                    <% } %>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
