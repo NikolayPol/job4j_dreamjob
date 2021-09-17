@@ -1,7 +1,7 @@
 <%--candidates.jsp--%>
 <%--HTML в выводом Кандидатов в виде карточек со скриплетом--%>
 <%--  @author Nikolay Polegaev.--%>
-<%--  @version 4.0 17.09.2021--%>
+<%--  @version 4.1 17.09.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -36,7 +36,6 @@
 <div class="container pt-3">
 
     <div class="row">
-        <%--Сделаем таблицу в виде карточек card-body--%>
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Кандидаты
@@ -52,33 +51,22 @@
                     <tbody>
                     <c:forEach var="candidate" items="${cands}" varStatus="status">
                         <tr valign="top">
-
                             <td>
-                                    <%--Добавили иконку в таблицу и ссылку на страницу edit--%>
                                 <a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=${candidate.id}">
                                     <i class="fa fa-edit mr-3">
                                     </i>
                                 </a>
-                                    <%--Имя кандидата--%>
                                 <a>${candidate.name}</a>
-
                             </td>
-
                             <td>
-                                    <%--Фото кандидата--%>
                                 <a>
                                     <img src="<c:url value='/download?name=${candidate.id}.jpg'/>" width="100px"
                                          height="100px"/>
                                 </a>
-
-                                    <%--Скачать фото кандидата--%>
                                 <a href="<c:url value='/download?name=${candidate.id}.jpg'/>">Download</a>
-
-                                    <%--Кнопка добавить--%>
                                 <a href="<%=request.getContextPath()%>/upload.jsp?id=${candidate.id}">
                                     Добавить
                                 </a>
-                                    <%--Кнопка удалить--%>
                                 <a href="<%=request.getContextPath()%>/delete?id=${candidate.id}">
                                     Удалить
                                 </a>
@@ -87,38 +75,6 @@
                         </tr>
                     </c:forEach>
                     </tbody>
-
-                    <%--                    <tbody>--%>
-                    <%--                    &lt;%&ndash;Выводим кандидатов из класса Store&ndash;%&gt;--%>
-                    <%--                    <% for (Candidate can : (Collection<Candidate>) request.getAttribute("cands")) { %>--%>
-                    <%--                    <%String id = String.valueOf(can.id+".jpg");%>--%>
-                    <%--                    <tr>--%>
-                    <%--                        <td>--%>
-                    <%--                            &lt;%&ndash;Добавили иконку в таблицу и ссылку на страницу edit&ndash;%&gt;--%>
-                    <%--                            <a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=<%=can.getId()%>">--%>
-                    <%--                                <i class="fa fa-edit mr-3">--%>
-                    <%--                                </i>--%>
-                    <%--                            </a>--%>
-                    <%--                            &lt;%&ndash;Имя кандидата&ndash;%&gt;--%>
-                    <%--                            <%= can.getName() %>--%>
-                    <%--                            &lt;%&ndash;Фото кандидата&ndash;%&gt;--%>
-                    <%--                            <img src="<c:url value='/download?name=${can.id}'/>" width="100px" height="100px"/>--%>
-                    <%--                            &lt;%&ndash;Скачать фото кандидата&ndash;%&gt;--%>
-                    <%--                            <a1 href="<c:url value='/download?name=${"1.jpg"}'/>">Download</a1>--%>
-
-                    <%--                            &lt;%&ndash;Кнопка добавить&ndash;%&gt;--%>
-                    <%--                            <a href="<%=request.getContextPath()%>/upload.jsp?id=<%=can.getId()%>">--%>
-                    <%--                                Добавить--%>
-                    <%--                            </a>--%>
-                    <%--                            &lt;%&ndash;Кнопка удалить&ndash;%&gt;--%>
-                    <%--                            <a href="<%=request.getContextPath()%>>">--%>
-                    <%--                                Удалить--%>
-                    <%--                            </a>--%>
-                    <%--                        </td>--%>
-                    <%--                    </tr>--%>
-                    <%--                    <% } %>--%>
-                    <%--                    </tbody>--%>
-
                 </table>
             </div>
         </div>

@@ -1,17 +1,14 @@
 <%--posts.jsp--%>
 <%--HTML в виде карточек со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.2 16.09.2021--%>
+<%--@version 3.3 17.09.2021--%>
 
-
-<%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.util.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--Страница с таблицей--%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,7 +33,6 @@
 </head>
 <body>
 <div class="container pt-3">
-    <%--Сделаем таблицу в виде карточек card-body--%>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -50,11 +46,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%--Выводим названия вакансий из класса Store--%>
                     <c:forEach var="post" items="${posts}">
                     <tr>
                         <td>
-                            <%--Добавили иконку в таблицу и ссылку на страницу edit--%>
                             <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
                                 <i class="fa fa-edit mr-3"></i>
                             </a>

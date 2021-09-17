@@ -1,7 +1,7 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для нового кандидата--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.0 16.09.2021--%>
+<%--@version 3.1 17.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
@@ -30,7 +30,6 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<%--Ищем по id кандидата в базе--%>
 <%
     String id = request.getParameter("id");
     Candidate can = new Candidate(0, "");

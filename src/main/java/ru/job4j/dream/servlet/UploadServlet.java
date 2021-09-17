@@ -20,6 +20,15 @@ import java.util.Objects;
 
 /**
  * Класс UploadServlet реализует загрузку файла на сервер.
+ * 1.Вначале мы создаем фабрику по которой можем понять,какие данные есть в запросах.
+ * Данные могу быть: поля или файлы.
+ * 2. Получаем список всех данных в запросе.
+ * 3. Если элемент не поле, то это файл и из него можно прочитать
+ * весь входной поток и записать его в файл или напрямую в базу данных.
+ * 4. После этого мы переходим в метод doGet, где отдаем список всех файлов.
+ * В этом списке содержатся только имена.
+ * 5. После этого мы переходим в метод doGet, где отдаем список всех файлов.
+ * В этом списке содержатся только имена.
  *
  * @author Nikolay Polegaev
  * @version 1.0 17.09.2021
@@ -29,8 +38,6 @@ public class UploadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         List<String> images = new ArrayList<>();
-        //4. После этого мы переходим в метод doGet, где отдаем список всех файлов.
-        // В этом списке содержатся только имена.
         for (File name : Objects.requireNonNull(new File("C:\\images\\").listFiles())) {
             images.add(name.getName());
         }
@@ -42,18 +49,13 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        //1. Вначале мы создаем фабрику по которой можем понять, какие данные есть в запросах.
-        // Данные могу быть: поля или файлы.
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
-            //2. Получаем список всех данных в запросе.
             List<FileItem> items = upload.parseRequest(req);
-            //3. Если элемент не поле, то это файл и из него можно прочитать
-            // весь входной поток и записать его в файл или напрямую в базу данных.
             File folder = new File("c:\\images\\");
             if (!folder.exists()) {
                 folder.mkdir();
@@ -69,8 +71,6 @@ public class UploadServlet extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        //4. После этого мы переходим в метод doGet, где отдаем список всех файлов.
-        // В этом списке содержатся только имена.
         doGet(req, resp);
     }
 }

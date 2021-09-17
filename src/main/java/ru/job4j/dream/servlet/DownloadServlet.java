@@ -10,9 +10,13 @@ import java.util.Objects;
 
 /**
  * Класс DownloadServlet скачавает файл с сервера.
+ *1.Мы выставляем заголовок ответа в протоколе.
+ *Таким образом мы сообщаем браузеру, что будем отправлять файл.
+ *resp.setContentType("application/octet-stream");
+ *2. Открываем поток и записываем его в выходной поток servlet.
  *
  * @author Nikolay Polegaev
- * @version 1.1 17.09.2021
+ * @version 1.2 17.09.2021
  */
 public class DownloadServlet extends HttpServlet {
     @Override
@@ -26,12 +30,8 @@ public class DownloadServlet extends HttpServlet {
                 break;
             }
         }
-        //1. Мы выставляем заголовок ответа в протоколе.
-        // Таким образом мы сообщаем браузеру, что будем отправлять файл.
-        //resp.setContentType("application/octet-stream");
         resp.setHeader("Content-Disposition", "attachment; filename=\""
                 + Objects.requireNonNull(downloadFile).getName() + "\"");
-        //2. Открываем поток и записываем его в выходной поток servlet.
         try (FileInputStream stream = new FileInputStream(downloadFile)) {
             resp.getOutputStream().write(stream.readAllBytes());
         }

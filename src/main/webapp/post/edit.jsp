@@ -1,7 +1,7 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для новой вакансии--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.0 16.09.2021--%>
+<%--@version 3.1 17.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
@@ -29,7 +29,6 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<%--Ищем по id вакансию в базе--%>
 <%
     String id = request.getParameter("id");
     Post post = new Post(0, "");
@@ -40,7 +39,6 @@
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
-            <%--отображение надписи в зависимоти от id вакансии--%>
             <div class="card-header">
                 <% if (id ==null) { %>
                 Новая вакансия.
@@ -49,14 +47,10 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <%--Чтобы JSP отправляла данные на сервер нужно в теге form указать адрес сервлета.--%>
-                <%--в реквесте передаем параметр id вакансии--%>
                 <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                            <%--в запросе на сервер нужно отправить содержимое этого поля с ключом name.--%>
                         <label>
-                            <%--В поле name загрузим имя--%>
                             <input type="text" class="form-control" name="name" value="<%=post.getName()%>">
                         </label>
                     </div>
