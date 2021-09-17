@@ -4,7 +4,7 @@
 <%--@version 3.1 17.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.store.MemStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <!doctype html>
@@ -34,7 +34,7 @@
     String id = request.getParameter("id");
     Candidate can = new Candidate(0, "");
     if (id != null) {
-        can =Store.instOf().findByIdCand(Integer.parseInt(id));
+        can = MemStore.instOf().findByIdCand(Integer.parseInt(id));
     }
 %>
 <div class="container pt-3">
