@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Класс реализован через синглтон.
  *
  * @author Nikolay Polegaev
- * @version 4.0 16.09.2021
+ * @version 5.0 17.09.2021
  */
 public class Store {
     private static final AtomicInteger POST_ID = new AtomicInteger(4);
@@ -66,5 +66,9 @@ public class Store {
 
     public Candidate findByIdCand(int id) {
         return candidates.get(id);
+    }
+
+    public void deleteCandidate(int id) {
+        candidates.remove(id);
     }
 }
