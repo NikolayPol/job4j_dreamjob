@@ -22,9 +22,9 @@ import java.util.Properties;
  * а возвращается обратно в пул.
  * Pom - зависимость:
  * <dependency>
- *     <groupId>org.apache.commons</groupId>
- *     <artifactId>commons-dbcp2</artifactId>
- *     <version>2.7.0</version>
+ * <groupId>org.apache.commons</groupId>
+ * <artifactId>commons-dbcp2</artifactId>
+ * <version>2.7.0</version>
  * </dependency>
  *
  * @author Nikolay Polegaev
@@ -112,6 +112,15 @@ public class PsqlStore implements Store {
         }
     }
 
+    @Override
+    public void save(Candidate candidate) {
+        if (candidate.getId() == 0) {
+            create(candidate);
+        } else {
+            update(candidate);
+        }
+    }
+
     private Post create(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
@@ -132,6 +141,26 @@ public class PsqlStore implements Store {
         return post;
     }
 
+    private Candidate create(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO candidate (name) "
+                             + "VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, candidate.getName());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    candidate.setId(id.getInt("id"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidate;
+    }
+
     private void update(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
@@ -144,21 +173,64 @@ public class PsqlStore implements Store {
         }
     }
 
+    private void update(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "update candidate set name = ? where id = ?")) {
+            ps.setString(1, candidate.getName());
+            ps.setInt(2, candidate.getId());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     @Override
-    public Post findById(int id) {
+    public Post findPostById(int id) {
         Post post = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "select * from post where id = ?")) {
-                     ps.setInt(1, id);
-                     ResultSet rs = ps.executeQuery();
-                     if (rs.next()) {
-                         post = new Post(rs.getInt("id"),
-                                 rs.getString("name"));
-                     }
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                post = new Post(rs.getInt("id"),
+                        rs.getString("name"));
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return post;
+    }
+
+    @Override
+    public Candidate findCandById(int id) {
+        Candidate candidate = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "select * from  candidate where id = ?")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                candidate = new Candidate(rs.getInt("id"),
+                        rs.getString("name"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return candidate;
+    }
+
+    @Override
+    public void deleteCandidate(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "DELETE FROM candidate where id =?"
+             )) {
+            ps.setInt(1, id);
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
