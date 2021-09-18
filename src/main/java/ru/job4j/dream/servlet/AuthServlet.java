@@ -1,16 +1,19 @@
 package ru.job4j.dream.servlet;
 
+import ru.job4j.dream.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Класс AuthServletextends
+ * Класс AuthServletextends авторизует пользователя
  *
  * @author Nikolay Polegaev
- * @version 1.0 18.09.2021
+ * @version 1.1 18.09.2021
  */
 public class AuthServlet extends HttpServlet {
     @Override
@@ -19,6 +22,18 @@ public class AuthServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         if ("root@local".equals(email) && "root".equals(password)) {
+            HttpSession sc = req.getSession();
+            User admin = new User();
+            admin.setName("Admin");
+            admin.setEmail(email);
+            sc.setAttribute("user", admin);
+            resp.sendRedirect(req.getContextPath() + "/posts.do");
+        } else if (email.contains("@") && password != null) {
+            HttpSession s = req.getSession();
+            User user = new User();
+            user.setName(email);
+            user.setEmail(email);
+            s.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/posts.do");
         } else {
             req.setAttribute("error", "Не верный email или пароль");

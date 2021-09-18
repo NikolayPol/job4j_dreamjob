@@ -1,13 +1,14 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для нового кандидата--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.1 17.09.2021--%>
+<%--@version 3.2 18.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.MemStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -40,10 +41,40 @@
 %>
 <div class="container pt-3">
     <div class="row">
+
+        <div class="row">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                </li>
+                <c:if test="${user != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"> <c:out
+                                value="${user.name}"/> | Выйти</a>
+                    </li>
+                </c:if>
+                <c:if test="${user == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> | Войти</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+
+
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                  Новый кандидат.
+                Новый кандидат.
                 <% } else { %>
                 Редактирование кандидата.
                 <% } %>
@@ -51,10 +82,10 @@
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
                     <div class="form-group">
-                            <label>Имя</label>
-                            <label>
-                                <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
-                            </label>
+                        <label>Имя</label>
+                        <label>
+                            <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

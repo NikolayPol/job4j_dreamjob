@@ -8,18 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Класс CandidateServlet сохраняет нового кандидата и возвращает ответ.
  *
  * @author Nikolay Polegaev
- * @version 1.1 16.09.2021
+ * @version 1.2 18.09.2021
  */
 public class CandidateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("cands", PsqlStore.instOf().findAllCandidates());
+        //req.setAttribute("cands", PsqlStore.instOf().findAllCandidates());
+        req.setAttribute("cands", new ArrayList<>(PsqlStore.instOf().findAllCandidates()));
+        req.setAttribute("user", req.getSession().getAttribute("user"));
         req.getRequestDispatcher("/candidate/candidates.jsp").forward(req, resp);
     }
 

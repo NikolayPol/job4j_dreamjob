@@ -8,18 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Класс PostServlet сохраняет новую вакансию и возвращает ответ.
  *
  * @author Nikolay Polegaev
- * @version 2.1 16.09.2021
+ * @version 2.2 18.09.2021
  */
 public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException,
             IOException {
-        req.setAttribute("posts", PsqlStore.instOf().findAllPosts());
+        //req.setAttribute("posts", PsqlStore.instOf().findAllPosts());
+        req.setAttribute("posts", new ArrayList<>(PsqlStore.instOf().findAllPosts()));
+        req.setAttribute("user", req.getSession().getAttribute("user"));
         req.getRequestDispatcher("/post/posts.jsp").forward(req, resp);
     }
 

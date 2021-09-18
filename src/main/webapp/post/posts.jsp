@@ -1,7 +1,7 @@
 <%--posts.jsp--%>
 <%--HTML в виде карточек со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.3 17.09.2021--%>
+<%--@version 3.4 18.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.MemStore" %>
@@ -34,6 +34,35 @@
 <body>
 <div class="container pt-3">
     <div class="row">
+
+        <div class="row">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                </li>
+                <c:if test="${user != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"> <c:out
+                                value="${user.name}"/> | Выйти</a>
+                    </li>
+                </c:if>
+                <c:if test="${user == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> | Войти</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Вакансии
@@ -47,14 +76,14 @@
                     </thead>
                     <tbody>
                     <c:forEach var="post" items="${posts}">
-                    <tr>
-                        <td>
-                            <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
-                                <i class="fa fa-edit mr-3"></i>
-                            </a>
-                            <c:out value="${post.name}"/>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
+                                <c:out value="${post.name}"/>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
