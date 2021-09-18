@@ -14,6 +14,7 @@ import java.util.Collection;
  */
 
 public interface Store {
+
     Collection<Post> findAllPosts();
 
     Collection<Candidate> findAllCandidates();

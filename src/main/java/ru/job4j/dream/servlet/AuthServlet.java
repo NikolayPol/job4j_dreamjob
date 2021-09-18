@@ -1,6 +1,7 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.User;
+import ru.job4j.dream.store.PsqlStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,7 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        User user = PsqlStore.instOf().findUserByEmail(email);
         if ("root@local".equals(email) && "root".equals(password)) {
             HttpSession sc = req.getSession();
             User admin = new User();
@@ -28,11 +30,8 @@ public class AuthServlet extends HttpServlet {
             admin.setEmail(email);
             sc.setAttribute("user", admin);
             resp.sendRedirect(req.getContextPath() + "/posts.do");
-        } else if (email.contains("@") && password != null) {
+        } else if (user.getPassword().equals(password)) {
             HttpSession s = req.getSession();
-            User user = new User();
-            user.setName(email);
-            user.setEmail(email);
             s.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/posts.do");
         } else {
