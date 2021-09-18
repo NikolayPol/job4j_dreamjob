@@ -13,3 +13,11 @@ CREATE TABLE candidate
 insert into candidate (id, name) values (1, 'Junior Jd');
 insert into candidate (id, name) values (2, 'Junior+ Jd');
 insert into candidate (id, name) values (3, 'SuperJunior Jd');
+
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    email TEXT,
+    password TEXT
+);

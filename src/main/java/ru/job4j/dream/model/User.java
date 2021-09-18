@@ -6,13 +6,23 @@ import java.util.Objects;
  * Класс User описывает авторизованного пользователя.
  *
  * @author Nikolay Polegaev
- * @version 1.0 18.09.2021
+ * @version 1.1 18.09.2021
  */
 public class User {
     private int id;
     private String name;
     private String email;
     private String password;
+
+    public User() {
+    }
+
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     public int getId() {
         return id;
@@ -61,5 +71,15 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + '}';
     }
 }
