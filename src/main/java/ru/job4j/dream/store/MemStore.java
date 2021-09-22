@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.util.Collection;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Nikolay Polegaev
  * @version 5.1 17.09.2021
  */
-public class MemStore {
+public class MemStore implements Store {
     private static final AtomicInteger POST_ID = new AtomicInteger(4);
     private static final AtomicInteger CAND_ID = new AtomicInteger(4);
     private static final MemStore INST = new MemStore();
@@ -68,5 +69,40 @@ public class MemStore {
 
     public void deleteCandidate(int id) {
         candidates.remove(id);
+    }
+
+    @Override
+    public Post findPostById(int id) {
+        return null;
+    }
+
+    @Override
+    public Candidate findCandById(int id) {
+        return null;
+    }
+
+    @Override
+    public Collection<User> findAllUsers() {
+        return null;
+    }
+
+    @Override
+    public void save(User user) {
+
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(int id) {
+
     }
 }
