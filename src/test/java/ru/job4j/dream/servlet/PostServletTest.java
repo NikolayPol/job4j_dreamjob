@@ -50,10 +50,12 @@
 // * Assert.assertThat(result.getDescription(), Is.is("d"));
 // *
 // * verify-проверка.
-// * verify(req, times(1)).getRequestDispatcher(path); - проверяет, что вызов 1 раз request установит
+// * verify(req, times(1)).getRequestDispatcher(path); - проверяет,
+// * что вызов 1 раз request установит
 // * у объекта RequestDispatcher параметр path - "/post/posts.jsp".
 // *
-// * verify(req, times(1)).getSession(); - проверка, что вызывается объект сессии 1 раз.
+// * verify(req, times(1)).getSession(); - проверка,
+// * что вызывается объект сессии 1 раз.
 // *
 // * verify(dispatcher).forward(req, resp); - проверка, что
 // * у dispatcher вызван метод forward с объектами req и resp.
