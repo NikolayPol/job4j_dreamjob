@@ -8,6 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
+        function addRow() {
+            const name = $('#name').val();
+            const surname = $('#surname').val();
+            const sex = $('#sex').val();
+            const description = $('#description').val();
+
+            $('#table tr:last').after('<tr>'
+            +'<td>' + name + '</td>'
+            +'<td>' + surname + '</td>'
+            +'<td>' + sex + '</td>'
+            +'<td>' + description + '</td>'
+            +'</tr>');
+        }
+
         function validate() {
             let res = true;
             let message = "Следующие поля не заполены:" + "\n";
@@ -54,13 +68,13 @@
             <label for="description">Описание</label>
             <input type="text" class="form-control" name="description" id="description">
         </div>
+        <button type="button" class="btn btn-default" onclick="addRow()">Add row</button>
         <button type="submit" class="btn btn-primary" onclick="return validate();">Submit</button>
     </form>
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Имя</th>
             <th scope="col">Фамилия</th>
             <th scope="col">Пол</th>
@@ -69,25 +83,10 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row">1</th>
             <td>Parfiry</td>
             <td>Parfirievich</td>
             <td>M</td>
             <td>SuperJunior</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Irina</td>
-            <td>Kondrashova</td>
-            <td>W</td>
-            <td>Junior</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Vsevolod</td>
-            <td>Feodosievich</td>
-            <td>M</td>
-            <td>Middle</td>
         </tr>
         </tbody>
     </table>
