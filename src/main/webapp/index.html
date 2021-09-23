@@ -7,6 +7,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            let res = true;
+            let message = "Следующие поля не заполены:" + "\n";
+            if ($('#name').val() === "") {
+                message = message + "Имя" + "\n";
+                res = false;
+            }
+            if ($('#surname').val() === "") {
+                message = message + "Фамилия" + "\n";
+                res = false;
+            }
+            if ($('#sex').val() === "") {
+                message = message + "Пол" + "\n";
+                res = false;
+            }
+            if ($('#description').val() === "") {
+                message = message + "Описание" + "\n";
+                res = false;
+            }
+            if (!res) {
+                alert(message);
+            }
+            return res;
+        }
+    </script>
 </head>
 <body>
 <div class="container-fluid">
