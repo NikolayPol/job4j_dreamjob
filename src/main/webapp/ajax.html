@@ -20,33 +20,63 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script>
-    function sendGreeting() {
+    $(document).ready(function () {
         $.ajax({
             type: 'GET',
-            crossdomain: true,
+            crossdomain:true,
             url: 'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + $(`#email`).val(),
-            dataType: 'text'
-        }).done(function(data) {
-            $('#emailForm').before("<h6>TestSuccess</h6>")
-            $('#emailForm').before(`<h6>${data}</h6>`)
-            console.log(data)
-            alert($(`#email`).val())
-        }).fail(function(err){
-            $('#emailForm').before("<h6>TestFailture</h6>")
+            dataType: 'json'
+        }).done(function (data) {
+            for (var email of data) {
+                $(`#emailList li:last`).append(`<li>${email.name}</li>`)
+            }
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+    function sendGreeting() {
+        $.ajax({
+            type: 'POST',
+            crossdomain:true,
+            url: 'http://localhost:8080/dreamjob/greet',
+            data: JSON.stringify({
+                name: $(`#exampleInputEmail1`).val()
+            }),
+            dataType: 'json'
+        }).done(function (data) {
+            $(`#emailList li:last`).append(`<li>${data.name}</li>`)
+        }).fail(function (err) {
+            console.log(err);
         });
     }
 </script>
 <body>
 <div class="container">
-    <form id="emailForm">
+    <form>
         <div class="form-group">
-            <label for="email" style="font-weight: bold">Email address:</label>
-            <input type="text" class="form-control" id="email"
-                   aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email">
         </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
     </form>
+    <br>
+    Почты:
+    <ul id="emailList">
+        <li></li>
+    </ul>
 </div>
+
+<!--<div class="container">-->
+<!--    <form id="emailForm">-->
+<!--        <div class="form-group">-->
+<!--            <label for="email" style="font-weight: bold">Email address:</label>-->
+<!--            <input type="text" class="form-control" id="email"-->
+<!--                   aria-describedby="emailHelp" placeholder="Enter email">-->
+<!--        </div>-->
+<!--        <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>-->
+<!--    </form>-->
+<!--</div>-->
 </body>
 </html>

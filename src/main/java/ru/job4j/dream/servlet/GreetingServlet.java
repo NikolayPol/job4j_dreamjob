@@ -1,28 +1,52 @@
 package ru.job4j.dream.servlet;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Класс GreetingServlet создан для работы с Ajax.
+ * При обработке POST запроса производится десериализация модели. Далее объект сохраняется в список.
+ * При обработке GET запроса происходит сериализация списка добавленных почтовых адресов.
  *
  * @author Nikolay Polegaev
- * @version 1.0 26.09.2021
+ * @version 2.0 26.09.2021
  */
 public class GreetingServlet extends HttpServlet {
+    private static final Gson GSON = new GsonBuilder().create();
+    private final List<Email> emails = new CopyOnWriteArrayList<>();
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        Email email = GSON.fromJson(req.getReader(), Email.class);
+        emails.add(email);
+        resp.setContentType("application/json; charset=utf-8");
+        OutputStream output = resp.getOutputStream();
+        String json = GSON.toJson(email);
+        output.write(json.getBytes(StandardCharsets.UTF_8));
+        output.flush();
+        output.close();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
-        String name = req.getParameter("name");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.println(name);
-        writer.flush();
+        resp.setContentType("application/json; charset=utf-8");
+        OutputStream output = resp.getOutputStream();
+        String json = GSON.toJson(emails);
+        output.write(json.getBytes(StandardCharsets.UTF_8));
+        output.flush();
+        output.close();
     }
 }
