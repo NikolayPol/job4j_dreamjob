@@ -1,6 +1,6 @@
-package ru.job4j.dream.servlet;
+/**package ru.job4j.dream.servlet;
 
-/**
+
  * Класс PostServletTest тестирует класс PostServlet
  * с использованием библиотеки Mockito.
  * 1) Чтобы запуск теста производился за счет библиотеки PowerMock,

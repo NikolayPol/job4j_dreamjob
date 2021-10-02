@@ -1,6 +1,6 @@
-package ru.job4j.dream.servlet;
+/**package ru.job4j.dream.servlet;
 
-/**
+
  * Класс CandidateServletTest тестирует класс CandidateServlet
  * с использованием библиотеки Mockito.
  *
