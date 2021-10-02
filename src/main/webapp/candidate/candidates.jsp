@@ -1,7 +1,7 @@
 <%--candidates.jsp--%>
 <%--HTML в выводом Кандидатов в виде карточек со скриплетом--%>
 <%--  @author Nikolay Polegaev.--%>
-<%--  @version 4.3 30.09.2021--%>
+<%--  @version 4.4 02.10.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>

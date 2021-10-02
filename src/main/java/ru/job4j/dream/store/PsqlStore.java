@@ -30,7 +30,7 @@ import java.util.Properties;
  * </dependency>
  *
  * @author Nikolay Polegaev
- * @version 1.1 18.09.2021
+ * @version 1.2 02.10.2021
  */
 
 public class PsqlStore implements Store {

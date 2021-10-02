@@ -11,7 +11,7 @@ import java.util.Collection;
  * Интерфейс Store описывает методы хранилища
  *
  * @author Nikolay Polegaev
- * @version 1.2 02.10.2021
+ * @version 1.3 02.10.2021
  */
 
 public interface Store {

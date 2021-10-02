@@ -1,7 +1,7 @@
 <%--edit.jsp--%>
 <%--Страница с формой ввода для новой вакансии--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.2 18.09.2021--%>
+<%--@version 3.3 02.10.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Post" %>

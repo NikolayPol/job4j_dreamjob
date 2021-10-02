@@ -1,7 +1,7 @@
 <%--posts.jsp--%>
 <%--HTML в виде карточек со скриплетом--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 3.4 18.09.2021--%>
+<%--@version 3.5 02.10.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.MemStore" %>

@@ -1,7 +1,7 @@
 <%--reg.jsp--%>
 <%--Страница для регистрации пользователя--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.1 26.09.2021--%>
+<%--@version 1.2 02.10.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>

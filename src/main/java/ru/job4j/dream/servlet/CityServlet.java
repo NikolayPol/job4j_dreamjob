@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * для регистрации нового кандидата.
  *
  * @author Nikolay Polegaev
- * @version 1.0 29.09.2021
+ * @version 1.1 02.10.2021
  */
 public class CityServlet extends HttpServlet {
     private static final Gson GSON = new GsonBuilder().create();

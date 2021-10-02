@@ -6,7 +6,7 @@ import java.util.Objects;
  * Класс City.
  *
  * @author Nikolay Polegaev
- * @version 1.0 26.09.2021
+ * @version 1.1 02.10.2021
  */
 public class City {
     private int id;

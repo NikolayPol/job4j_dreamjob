@@ -6,7 +6,7 @@ import java.util.Objects;
  * Класс Candidate описывает модель данных Кандидата
  *
  * @author Nikolay Polegaev
- * @version 2.2 31.09.2021
+ * @version 2.3 02.10.2021
  */
 public class Candidate {
     private int id;

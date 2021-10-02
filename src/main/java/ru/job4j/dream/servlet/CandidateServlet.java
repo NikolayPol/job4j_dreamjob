@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Класс CandidateServlet сохраняет нового кандидата и возвращает ответ.
  *
  * @author Nikolay Polegaev
- * @version 1.3 30.09.2021
+ * @version 1.4 02.10.2021
  */
 public class CandidateServlet extends HttpServlet {
     @Override

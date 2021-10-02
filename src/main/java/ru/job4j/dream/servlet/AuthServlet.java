@@ -14,7 +14,7 @@ import java.io.IOException;
  * Класс AuthServletextends авторизует пользователя
  *
  * @author Nikolay Polegaev
- * @version 1.2 02.10.2021
+ * @version 1.3 02.10.2021
  */
 public class AuthServlet extends HttpServlet {
     @Override

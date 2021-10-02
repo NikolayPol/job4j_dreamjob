@@ -26,7 +26,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
  * с использованием библиотеки Mockito.
  *
  * @author Nikolay Polegaev
- * @version 1.0 22.09.2021
+ * @version 1.1 02.10.2021
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(PsqlStore.class)

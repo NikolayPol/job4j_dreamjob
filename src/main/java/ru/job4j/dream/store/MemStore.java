@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Класс реализован через синглтон.
  *
  * @author Nikolay Polegaev
- * @version 5.1 17.09.2021
+ * @version 5.2 02.10.2021
  */
 public class MemStore implements Store {
     private static final AtomicInteger POST_ID = new AtomicInteger(4);

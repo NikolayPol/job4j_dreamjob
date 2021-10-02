@@ -1,7 +1,7 @@
 <%--login.jsp--%>
 <%--Страница для входа в приложение под конкретным пользователем--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.2 26.09.2021--%>
+<%--@version 1.3 02.10.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
