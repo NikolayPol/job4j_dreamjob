@@ -11,7 +11,7 @@ import java.util.Collection;
  * Интерфейс Store описывает методы хранилища
  *
  * @author Nikolay Polegaev
- * @version 1.3 02.10.2021
+ * @version 1.4 02.10.2021
  */
 
 public interface Store {
@@ -34,11 +34,7 @@ public interface Store {
 
     void save(User user);
 
-    User findUserById(int id);
-
     User findUserByEmail(String email);
-
-    void deleteUser(int id);
 
     Collection<City> findAllCities();
 }

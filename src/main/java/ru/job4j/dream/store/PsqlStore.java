@@ -30,7 +30,7 @@ import java.util.Properties;
  * </dependency>
  *
  * @author Nikolay Polegaev
- * @version 1.2 02.10.2021
+ * @version 1.3 02.10.2021
  */
 
 public class PsqlStore implements Store {
@@ -311,26 +311,6 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public User findUserById(int id) {
-        User user = null;
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "select * from users where id = ?")) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                user = new User(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password"));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return user;
-    }
-
-    @Override
     public User findUserByEmail(String email) {
         User user = null;
         try (Connection cn = pool.getConnection();
@@ -348,19 +328,6 @@ public class PsqlStore implements Store {
             throwables.printStackTrace();
         }
         return user;
-    }
-
-    @Override
-    public void deleteUser(int id) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "DELETE FROM users where id =?"
-             )) {
-            ps.setInt(1, id);
-            ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     @Override
