@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Класс реализован через синглтон.
  *
  * @author Nikolay Polegaev
- * @version 5.2 02.10.2021
+ * @version 5.3 02.10.2021
  */
 public class MemStore implements Store {
     private static final AtomicInteger POST_ID = new AtomicInteger(4);
@@ -93,18 +93,8 @@ public class MemStore implements Store {
     }
 
     @Override
-    public User findUserById(int id) {
-        return null;
-    }
-
-    @Override
     public User findUserByEmail(String email) {
         return null;
-    }
-
-    @Override
-    public void deleteUser(int id) {
-
     }
 
     @Override
