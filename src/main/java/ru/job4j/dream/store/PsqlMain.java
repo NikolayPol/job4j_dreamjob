@@ -8,7 +8,7 @@ import ru.job4j.dream.model.User;
  * Класс PsqlMain для тестирования класса PsqlStore
  *
  * @author Nikolay Polegaev
- * @version 1.2 02.10.2021
+ * @version 1.3 02.10.2021
  */
 public class PsqlMain {
     public static void main(String[] args) {
@@ -38,13 +38,6 @@ public class PsqlMain {
 
         User user = new User(0, "Parfiry", "123@ya.ru", "1234");
         store.save(user);
-        for (User u : store.findAllUsers()) {
-            System.out.println(u.getId() + " " + u.getName() + " "
-                   + u.getEmail() + " " + u.getPassword());
-        }
-        System.out.println(store.findUserById(1));
-        System.out.println(store.findUserByEmail("123@ya.ru"));
-        store.deleteUser(1);
         for (User u : store.findAllUsers()) {
             System.out.println(u.getId() + " " + u.getName() + " "
                    + u.getEmail() + " " + u.getPassword());
