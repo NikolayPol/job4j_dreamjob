@@ -2,6 +2,7 @@ package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.User;
 import ru.job4j.dream.store.PsqlStore;
+import ru.job4j.dream.store.Store;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import java.io.IOException;
  * Сохраняет его в базу данных.
  *
  * @author Nikolay Polegaev
- * @version 1.0 18.09.2021
+ * @version 1.1 02.10.2021
  */
 public class RegServlet extends HttpServlet {
     @Override
@@ -30,12 +31,15 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = new User();
-        user.setId(0);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        PsqlStore.instOf().save(user);
+        User user = new User(0, name, email, password);
+        Store store = PsqlStore.instOf();
+        if (store.findUserByEmail(email) != null) {
+            req.setAttribute("error", "Пользователь с " + email
+                    + "уже зарегистрирован");
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+        } else {
+            store.save(user);
+        }
         resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 }
