@@ -42,5 +42,4 @@ public class RegServlet extends HttpServlet {
         }
         resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
-
 }
