@@ -1,5 +1,6 @@
 package ru.job4j.dream.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -13,22 +14,34 @@ public class Candidate {
     private String name;
     private int cityId;
     private String city;
-
-    public Candidate(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private LocalDateTime created;
 
     public Candidate(int id, String name, int cityId) {
         this.id = id;
         this.name = name;
         this.cityId = cityId;
+        this.created = LocalDateTime.now();
     }
 
     public Candidate(int id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
+        this.created = LocalDateTime.now();
+    }
+
+    public Candidate(int id, String name, int cityId, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.cityId = cityId;
+        this.created = created;
+    }
+
+    public Candidate(int id, String name, String city, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.created = created;
     }
 
     public int getId() {
@@ -61,6 +74,14 @@ public class Candidate {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     @Override

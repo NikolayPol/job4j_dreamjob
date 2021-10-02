@@ -26,9 +26,13 @@ public interface Store {
 
     Post findPostById(int id);
 
+    Collection<Post> findTodayPosts();
+
     Candidate findCandById(int id);
 
     void deleteCandidate(int id);
+
+    Collection<Candidate> findTodayCandidates();
 
     Collection<User> findAllUsers();
 

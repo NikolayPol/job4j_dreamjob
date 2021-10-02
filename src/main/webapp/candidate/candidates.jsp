@@ -52,8 +52,8 @@
                 </li>
                 <c:if test="${user != null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"> <c:out
-                                value="${user.name}"/> | Выйти</a>
+                        <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">
+                            <c:out value="${user.name}"/> | Выйти</a>
                     </li>
                 </c:if>
                 <c:if test="${user == null}">

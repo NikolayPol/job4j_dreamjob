@@ -101,4 +101,14 @@ public class MemStore implements Store {
     public Collection<City> findAllCities() {
         return null;
     }
+
+    @Override
+    public Collection<Post> findTodayPosts() {
+        return null;
+    }
+
+    @Override
+    public Collection<Candidate> findTodayCandidates() {
+        return null;
+    }
 }

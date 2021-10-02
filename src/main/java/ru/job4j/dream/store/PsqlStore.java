@@ -78,7 +78,8 @@ public class PsqlStore implements Store {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     posts.add(new Post(it.getInt("id"),
-                            it.getString("name")));
+                            it.getString("name"),
+                            it.getTimestamp(3).toLocalDateTime()));
                 }
             }
         } catch (Exception e) {
@@ -92,7 +93,7 @@ public class PsqlStore implements Store {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "SELECT candidate.id, candidate.name, cities.name "
+                     "SELECT candidate.id, candidate.name, candidate.created, cities.name "
                              + "FROM candidate "
                              + "INNER JOIN cities "
                              + "ON candidate.city_id = cities.id")) {
@@ -102,7 +103,8 @@ public class PsqlStore implements Store {
                         new Candidate(
                                 rs.getInt(1),
                                 rs.getString(2),
-                                rs.getString(3)
+                                rs.getString(4),
+                                rs.getTimestamp(3).toLocalDateTime()
                         ));
             }
         } catch (SQLException e) {
@@ -199,12 +201,13 @@ public class PsqlStore implements Store {
         Post post = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "select * from post where id = ?")) {
+                     "SELECT * FROM post WHERE id = ?")) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 post = new Post(rs.getInt("id"),
-                        rs.getString("name"));
+                        rs.getString("name"),
+                        rs.getTimestamp("created").toLocalDateTime());
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -217,12 +220,14 @@ public class PsqlStore implements Store {
         Candidate candidate = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "select * from  candidate where id = ?")) {
+                     "SELECT * FROM  candidate WHERE id = ?")) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 candidate = new Candidate(rs.getInt("id"),
-                        rs.getString("name"));
+                        rs.getString("name"),
+                        rs.getInt(3),
+                        rs.getTimestamp("created").toLocalDateTime());
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -347,5 +352,52 @@ public class PsqlStore implements Store {
             LOG.error(e.getMessage(), e);
         }
         return result;
+    }
+
+    @Override
+    public Collection<Post> findTodayPosts() {
+        List<Post> posts = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post "
+                     + "WHERE post.created > current_date")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    posts.add(new Post(it.getInt(1),
+                            it.getString(2),
+                            it.getTimestamp(3).toLocalDateTime()));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return posts;
+    }
+
+    @Override
+    public Collection<Candidate> findTodayCandidates() {
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT candidate.id, candidate.name, candidate.created, cities.name "
+                             + "FROM candidate "
+                             + "INNER JOIN cities "
+                             + "ON candidate.city_id = cities.id "
+                             + "WHERE candidate.created > current_date"
+             )) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                candidates.add(
+                        new Candidate(
+                                rs.getInt(1),
+                                rs.getString(2),
+                                rs.getString(4),
+                                rs.getTimestamp(3).toLocalDateTime()
+                        ));
+            }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return candidates;
     }
 }

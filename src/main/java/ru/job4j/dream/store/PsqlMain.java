@@ -13,7 +13,7 @@ import ru.job4j.dream.model.User;
 public class PsqlMain {
     public static void main(String[] args) {
         Store store = PsqlStore.instOf();
-        Post post = new Post(0, "Java Job!!");
+        Post post = new Post(0, "Java Job");
         store.save(post);
         for (Post el : store.findAllPosts()) {
             System.out.println(el.getId() + " " + el.getName());
@@ -21,7 +21,7 @@ public class PsqlMain {
         post.setId(1);
         store.save(post);
 
-        Candidate c = new Candidate(4, "SuperJunior JavaDev");
+        Candidate c = new Candidate(4, "Junior Java Developer", 1);
         store.save(c);
         for (Candidate el : store.findAllCandidates()) {
             System.out.println(el.getId() + " " + el.getName());
