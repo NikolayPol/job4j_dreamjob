@@ -14,13 +14,12 @@ import java.util.ArrayList;
  * Класс CandidateServlet сохраняет нового кандидата и возвращает ответ.
  *
  * @author Nikolay Polegaev
- * @version 1.2 18.09.2021
+ * @version 1.3 30.09.2021
  */
 public class CandidateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        //req.setAttribute("cands", PsqlStore.instOf().findAllCandidates());
         req.setAttribute("cands", new ArrayList<>(PsqlStore.instOf().findAllCandidates()));
         req.setAttribute("user", req.getSession().getAttribute("user"));
         req.getRequestDispatcher("/candidate/candidates.jsp").forward(req, resp);
@@ -30,8 +29,10 @@ public class CandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         req.setCharacterEncoding("UTF-8");
-        PsqlStore.instOf().save(new Candidate(Integer.parseInt(req.getParameter("id")),
-                req.getParameter("name")));
+        PsqlStore.instOf().save(new Candidate(
+                        Integer.parseInt(req.getParameter("id")),
+                        req.getParameter("name"),
+                        Integer.parseInt(req.getParameter("city"))));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
