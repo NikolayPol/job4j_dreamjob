@@ -66,7 +66,7 @@ public class CandidateServletTest {
 
         when(req.getParameter("id")).thenReturn("4");
         when(req.getParameter("name")).thenReturn("SuperJunior Java");
-        when(req.getParameter("city")).thenReturn("1");
+        when(req.getParameter("cityId")).thenReturn("1");
 
         new CandidateServlet().doPost(req, resp);
 

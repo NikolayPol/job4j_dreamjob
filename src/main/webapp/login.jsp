@@ -1,7 +1,7 @@
 <%--login.jsp--%>
 <%--Страница для входа в приложение под конкретным пользователем--%>
 <%--@author Nikolay Polegaev--%>
-<%--@version 1.1 18.09.2021--%>
+<%--@version 1.2 26.09.2021--%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
@@ -23,7 +23,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <script>
+        function validate() {
+            let res = true;
+            let message = "Следующие поля не заполены:" + "\n";
+            if ($('#email').val() === "") {
+                message = message + "Почта" + "\n";
+                res = false;
+            }
+            if ($('#password').val() === "") {
+                message = message + "Пароль" + "\n";
+                res = false;
+            }
+            if (!res) {
+                alert(message);
+            }
+            return res;
+        }
 
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -38,15 +56,17 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                    <div class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/reg.do">Регистрация</a>
+                    <button type="submit" class="btn btn-primary" onclick="validate()">
+                        Войти</button>
+                    <div class="nav-item" >
+                        <a class="nav-link" href="<%=request.getContextPath()%>/reg.do"
+                           style="padding-left: 0">Регистрация</a>
                     </div>
 
                 </form>

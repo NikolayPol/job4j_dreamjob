@@ -14,7 +14,7 @@ import java.io.IOException;
  * Класс AuthServletextends авторизует пользователя
  *
  * @author Nikolay Polegaev
- * @version 1.1 18.09.2021
+ * @version 1.2 02.10.2021
  */
 public class AuthServlet extends HttpServlet {
     @Override
@@ -23,14 +23,7 @@ public class AuthServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         User user = PsqlStore.instOf().findUserByEmail(email);
-        if ("root@local".equals(email) && "root".equals(password)) {
-            HttpSession sc = req.getSession();
-            User admin = new User();
-            admin.setName("Admin");
-            admin.setEmail(email);
-            sc.setAttribute("user", admin);
-            resp.sendRedirect(req.getContextPath() + "/posts.do");
-        } else if (user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
             HttpSession s = req.getSession();
             s.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/posts.do");

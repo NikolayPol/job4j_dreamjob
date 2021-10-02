@@ -1,7 +1,7 @@
 <%--candidates.jsp--%>
 <%--HTML в выводом Кандидатов в виде карточек со скриплетом--%>
 <%--  @author Nikolay Polegaev.--%>
-<%--  @version 4.2 18.09.2021--%>
+<%--  @version 4.3 30.09.2021--%>
 
 <%--Импоритруем java классы--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -74,6 +74,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Позиция кандидата</th>
+                        <th scope="col">Город</th>
                         <th scope="col">Фото</th>
                     </tr>
                     </thead>
@@ -88,6 +89,9 @@
                                 <a>${candidate.name}</a>
                             </td>
                             <td>
+                                <c:out value="${candidate.city}"/>
+                            </td>
+                            <td>
                                 <a>
                                     <img src="<c:url value='/download?name=${candidate.id}.jpg'/>" width="100px"
                                          height="100px"/>
@@ -100,7 +104,6 @@
                                     Удалить
                                 </a>
                             </td>
-
                         </tr>
                     </c:forEach>
                     </tbody>

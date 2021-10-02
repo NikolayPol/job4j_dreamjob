@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -10,7 +11,7 @@ import java.util.Collection;
  * Интерфейс Store описывает методы хранилища
  *
  * @author Nikolay Polegaev
- * @version 1.1 18.09.2021
+ * @version 1.2 02.10.2021
  */
 
 public interface Store {
@@ -38,4 +39,6 @@ public interface Store {
     User findUserByEmail(String email);
 
     void deleteUser(int id);
+
+    Collection<City> findAllCities();
 }

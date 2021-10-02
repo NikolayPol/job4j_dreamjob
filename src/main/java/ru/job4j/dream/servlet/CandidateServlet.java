@@ -30,9 +30,9 @@ public class CandidateServlet extends HttpServlet {
             throws IOException {
         req.setCharacterEncoding("UTF-8");
         PsqlStore.instOf().save(new Candidate(
-                        Integer.parseInt(req.getParameter("id")),
-                        req.getParameter("name"),
-                        Integer.parseInt(req.getParameter("cityId"))));
+                Integer.parseInt(req.getParameter("id")),
+                req.getParameter("name"),
+                Integer.parseInt(req.getParameter("city"))));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
