@@ -17,6 +17,7 @@ import java.io.IOException;
  * @author Nikolay Polegaev
  * @version 1.1 02.10.2021
  */
+
 public class RegServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
