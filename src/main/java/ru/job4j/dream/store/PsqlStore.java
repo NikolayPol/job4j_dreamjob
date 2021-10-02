@@ -1,6 +1,8 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
@@ -33,7 +35,7 @@ import java.util.Properties;
  * @version 1.3 02.10.2021
  */
 public class PsqlStore implements Store {
-
+    private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
     private final BasicDataSource pool = new BasicDataSource();
 
     private PsqlStore() {
@@ -80,7 +82,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return posts;
     }
@@ -103,8 +105,8 @@ public class PsqlStore implements Store {
                                 rs.getString(3)
                         ));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return candidates;
     }
@@ -142,7 +144,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return post;
     }
@@ -163,7 +165,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return candidate;
     }
@@ -175,8 +177,8 @@ public class PsqlStore implements Store {
             ps.setString(1, post.getName());
             ps.setInt(2, post.getId());
             ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -187,8 +189,8 @@ public class PsqlStore implements Store {
             ps.setString(1, candidate.getName());
             ps.setInt(2, candidate.getId());
             ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -204,8 +206,8 @@ public class PsqlStore implements Store {
                 post = new Post(rs.getInt("id"),
                         rs.getString("name"));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return post;
     }
@@ -222,8 +224,8 @@ public class PsqlStore implements Store {
                 candidate = new Candidate(rs.getInt("id"),
                         rs.getString("name"));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return candidate;
     }
@@ -236,8 +238,8 @@ public class PsqlStore implements Store {
              )) {
             ps.setInt(1, id);
             ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -257,8 +259,8 @@ public class PsqlStore implements Store {
                                 rs.getString("email"),
                                 rs.getString("password")));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return users;
     }
@@ -289,7 +291,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return user;
     }
@@ -304,8 +306,8 @@ public class PsqlStore implements Store {
             ps.setString(3, user.getPassword());
             ps.setInt(4, user.getId());
             ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -323,8 +325,8 @@ public class PsqlStore implements Store {
                         rs.getString("email"),
                         rs.getString("password"));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return user;
     }
@@ -342,7 +344,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
