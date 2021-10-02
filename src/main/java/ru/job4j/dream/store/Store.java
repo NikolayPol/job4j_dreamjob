@@ -13,7 +13,6 @@ import java.util.Collection;
  * @author Nikolay Polegaev
  * @version 1.4 02.10.2021
  */
-
 public interface Store {
 
     Collection<Post> findAllPosts();
